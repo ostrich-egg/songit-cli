@@ -3,8 +3,8 @@
 const express = require("express");
 const axios = require("axios");
 // const inquirer = require("inquirer");
-const app = express();
-const { Scrapped } = require("./lib&api/scrapper.js")
+
+const { Scrapped } = require("./lib&api/scrapper.js");
 const { videoChunks } = require("./lib&api/ytdl.js");
 require("dotenv").config();
 const path = require("path");
@@ -36,12 +36,8 @@ User_argument();
 const get_YTlink = async () => {
 
     const YTscrapper = new Scrapped();
-
     const response = await YTscrapper.YTlink(final_input);
 
-    // console.log("Scrapper",YTscrapper.Track_Info);
-
-    // const duration_raw = response.videos[0].duration;
     const Track_Info = YTscrapper.Track_Info;
     Track_Info.duration = response.videos[0].duration;
 
