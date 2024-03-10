@@ -1,21 +1,21 @@
 # Songit <br>
 *songit more like sangeet(music) is a CLI application to download any music you want*<br>
 
-## Get Started
+## Get Started/Installation
 
+**Download**
 [`Install this Github repo`](https://github.com/shree5-png/songit-cli.git)<br>
 
-*or*<br>
+
+**Using Git**
 
 ```sh
 Git clone https://github.com/shree5-png/songit-cli.git
+cd songit
+npm install -g
 ```
 
 ## Setup
-
-```sh
-npm install -g
-```
 
 To setup Spotify Client
 
@@ -26,7 +26,7 @@ soli -c
 *This will open a config file where you put your client id and pass*<br>
 *However you can still download without need of spotify just `soli -raw "never gonna give you up"`, -raw is necessary*<br>
 
-## Run
+## Run/Usage
 
 Without spotify
 
