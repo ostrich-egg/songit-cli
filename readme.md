@@ -19,14 +19,14 @@
 *To setup Spotify Client*
 >`soli -c`<br>
 *This will open a config file where you put your client id and pass*<br>
-*However you can still download without need of spotify just `soli -raw "never gonna give you up"` -raw is necessary*<br>
+*However you can still download without need of spotify just `soli -raw "never gonna give you up"`, -raw is necessary*<br>
 
 #### Run
 
-*Without spotify*
+Without spotify
 >`soli -raw "Never gonna give you up"`<br>
 
-*With spotify*
+With spotify
 >`soli "Never gonna give you up"`<br>
 
 
