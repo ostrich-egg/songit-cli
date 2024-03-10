@@ -10,7 +10,9 @@
 
 *or*<br>
 
-`Git clone https://github.com/shree5-png/songit-cli.git`<br>
+```sh
+Git clone https://github.com/shree5-png/songit-cli.git
+```
 
 ## Setup
 
