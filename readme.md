@@ -15,7 +15,7 @@
 ## Setup
 
 ```sh
->`npm install -g`<br>
+npm install -g
 ```
 
 *To setup Spotify Client*
