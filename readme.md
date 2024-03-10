@@ -7,7 +7,7 @@
 [`Install this Github repo`](https://github.com/shree5-png/songit-cli.git)<br>
 
 
-**Using Git**
+*or*
 
 ```sh
 Git clone https://github.com/shree5-png/songit-cli.git
