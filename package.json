@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Download any songs you like",
   "main": "index.js",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,13 +17,14 @@
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "@yimura/scraper": "^1.2.4",
     "axios": "^1.6.7",
-    "dotenv": "^16.4.5",
+    "config": "^3.3.11",
     "express": "^4.18.2",
     "ffmpeg": "^0.0.4",
     "fluent-ffmpeg": "^2.1.2",
     "fs": "^0.0.1-security",
     "inquirer": "^9.2.15",
     "node-id3": "^0.2.6",
+    "open": "^10.1.0",
     "path": "^0.12.7",
     "ytdl-core": "^4.11.5"
   }

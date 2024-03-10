@@ -1,32 +1,29 @@
-const Scrapper = require("@yimura/scraper").default;
-// const { user_input } = require("../index.js");
-const {Spotify} = require("./spotify.js");
+
+import yt from '@yimura/scraper'
+
+class Scrapped {
+
+    constructor(Track_i) {
+        this.Youtube = new yt.default();
+
+        this.Track_Info = Track_i;
 
 
-
-class Scrapped{
-
-    constructor(){
-        this.Youtube = new Scrapper();
-        this.SpotifyAPI = new Spotify();
-        this.Track_Info;
-        
     }
 
-        
-YTlink =async (user_input)=>{
 
-   
-    this.Track_Info = await this.SpotifyAPI.getTrack(user_input);
+    YTdata = async () => {
 
-    const response = this.Youtube.search(`${this.Track_Info.audio_name} by ${this.Track_Info.album_artist} and  ${this.Track_Info.contributing_artist}`);
-   
-    
-    return response;
+
+        const artist = (this.Track_Info.album_artist) ? `by ${this.Track_Info.album_artist}` : "";
+        const support = (this.Track_Info.contributing_artist) ? `and ${this.Track_Info.contributing_artist}` : "";
+
+        const response = this.Youtube.search(`${this.Track_Info.audio_name} ${artist} ${support}`);
+
+        return response;
+
+    }
+
 
 }
-
-
-}
-
-module.exports ={Scrapped};
+export { Scrapped };

@@ -1,5 +1,5 @@
 
-const NodeID3 = require('node-id3');
+import NodeID3 from 'node-id3';
 
 const embedImage = (imagePath, outputPath) => {
 
@@ -16,14 +16,11 @@ const embedImage = (imagePath, outputPath) => {
         }
 
         if (buffer) {
-            console.log(buffer);
+            console.log("buffer", buffer);
         }
     })
-
-    console.log("Successfully Completed")
-
 }
 
 
 
-module.exports = { embedImage }
+export { embedImage }

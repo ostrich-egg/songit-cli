@@ -1,13 +1,19 @@
-const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
-const ffmpeg = require("fluent-ffmpeg");
+
+// Import the path property from '@ffmpeg-installer/ffmpeg' module
+import { path as ffmpegPath } from '@ffmpeg-installer/ffmpeg';
+
+// Import 'fluent-ffmpeg' module dynamically
+const { default: ffmpeg } = await import('fluent-ffmpeg');
+
+// Set the FFMpeg path
 ffmpeg.setFfmpegPath(ffmpegPath);
 
-const axios = require("axios");
-const fs = require("fs");
-const os = require("os");
-const path = require("path");
+import axios from "axios"
+import os from "os"
+import fs from "fs"
+import path from "path"
 
-const { embedImage } = require("./metaimage.js")
+import { embedImage } from './metaimage.js';
 
 
 
@@ -19,11 +25,9 @@ const EncodingAndDownloadAudio = async (audio, audioBitRate, Track_Info) => {
     console.log("Encoding", Track_Info);
 
     // For the audio title
-    const artist = Track_Info.album_artist;
+    const artist = (Track_Info.album_artist) ? `- ${Track_Info.album_artist}` : "";
     const other_artist = (Track_Info.contributing_artist != artist) ? (`_${Track_Info.contributing_artist}`) : "";
-    const audio_title = (`${Track_Info.audio_name} - ${artist}${other_artist}`).replaceAll(/\/"||'`]/g, "").replaceAll(/,:/g, "_");
-
-    console.log(audio_title);
+    const audio_title = (`${Track_Info.audio_name || ""}${artist}${other_artist}`).replaceAll(/[’'`|||]/g, "").replaceAll(/[,:'/]/g, "_");
 
     // Checking if the songit folder exist or not 
     const dir = `C:\\Users\\User\\Downloads\\songit`;
@@ -31,8 +35,6 @@ const EncodingAndDownloadAudio = async (audio, audioBitRate, Track_Info) => {
       fs.mkdirSync(dir, { recursive: true })
     }
     const outputPath = `${dir}\\${audio_title}.mp3`;
-
-
 
 
     let imagePath;
@@ -52,7 +54,7 @@ const EncodingAndDownloadAudio = async (audio, audioBitRate, Track_Info) => {
       imagePath = `${dirPath}\\${audio_title}.jpg`;
 
 
-      //Make the directory
+      //Make the directoryc
       if (!fs.existsSync(dirPath)) {
         fs.mkdirSync(dirPath, { recursive: true });
       }
@@ -104,7 +106,7 @@ const EncodingAndDownloadAudio = async (audio, audioBitRate, Track_Info) => {
         Number(time_array[1]) * 60 +
         Math.floor(Number(time_array[2]));
 
-      percent = Math.ceil((current_time / duration) * 100);
+      let percent = Math.ceil((current_time / duration) * 100);
 
       process.stdout.write(`Progressing ${percent}%\r`);
 
@@ -119,7 +121,7 @@ const EncodingAndDownloadAudio = async (audio, audioBitRate, Track_Info) => {
         embedImage(imagePath, outputPath);
         fs.unlinkSync(imagePath);  //It clear the image that was stored before from the PC after image is embedded
 
-        console.log("Uploaded")
+        console.log("Music is ready to serve")
 
 
       })
@@ -138,4 +140,4 @@ const EncodingAndDownloadAudio = async (audio, audioBitRate, Track_Info) => {
 
 };
 
-module.exports = { EncodingAndDownloadAudio };
+export { EncodingAndDownloadAudio };
