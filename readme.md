@@ -14,19 +14,25 @@
 
 ### Setup
 
->`npm install`<br>
+>`npm install -g`<br>
 
->*Make a .env file*<br>
-*Your env file should look something like this*<br>
-`CLIENT_ID: <-Spotify Client ID->`<br>
-`CLIENT_SEC: <-Spotify Client Security->`<br>
+*To setup Spotify Client*
+>`soli -c`<br>
+*This will open a config file where you put your client id and pass*<br>
+*However you can still download without need of spotify just `soli -raw "never gonna give you up"` -raw is necessary*<br>
 
 #### Run
 
+*Without spotify*
+>`soli -raw "Never gonna give you up"`<br>
+
+*With spotify*
 >`soli "Never gonna give you up"`<br>
 
 
 ## Notes
+
+*It is recommended to use spotify for accuracy and better quality.*<br>
 *Make sure to keep updating, as new features will keep being added on*
 
 
