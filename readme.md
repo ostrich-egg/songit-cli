@@ -1,12 +1,9 @@
 # Songit <br>
-*songit more like sangeet(music) is a CLI application to download any music you want*
-
-<br>
-
+*songit more like sangeet(music) is a CLI application to download any music you want*<br>
 
 ## Get Started
 
-`Install this Github repo:` [click here](https://github.com/shree5-png/songit-cli.git)<br>
+[`Install this Github repo`](https://github.com/shree5-png/songit-cli.git)<br>
 
 *or*<br>
 
@@ -20,7 +17,7 @@ Git clone https://github.com/shree5-png/songit-cli.git
 npm install -g
 ```
 
-*To setup Spotify Client*
+To setup Spotify Client
 
 ```sh
 soli -c
@@ -46,8 +43,8 @@ soli "Never gonna give you up"
 
 ## Notes
 
-*It is recommended to use spotify for accuracy and better quality.*<br>
-*Make sure to keep updating, as new features will keep being added on*
+*> It is recommended to use spotify for accuracy and better quality.*<br>
+*> Make sure to keep updating, as new features will keep being added on*
 
 
 
