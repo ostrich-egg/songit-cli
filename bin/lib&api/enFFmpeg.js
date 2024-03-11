@@ -27,7 +27,7 @@ const EncodingAndDownloadAudio = async (audio, audioBitRate, Track_Info) => {
     // For the audio title
     const artist = (Track_Info.album_artist) ? ` - ${Track_Info.album_artist}` : "";
     const other_artist = ((Track_Info.contributing_artist) !== artist.replace(" - ", "")) ? (`_${Track_Info.contributing_artist}`) : "";
-    const audio_title = (`${Track_Info.audio_name || ""}${artist}${other_artist}`).replaceAll(/[’'`|||]/g, "").replaceAll(/[,:'/]/g, "_");
+    const audio_title = (`${Track_Info.audio_name || ""}${artist}${other_artist}`).replaceAll(/[’'`|?"||]/g, "").replaceAll(/[,:/]/g, "_");
 
     // Checking if the songit folder exist or not 
     const dir = `C:\\Users\\User\\Downloads\\songit`;
