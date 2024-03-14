@@ -13,6 +13,9 @@ import os from "os"
 import fs from "fs"
 import path from "path"
 
+
+const { default: config } = await import("config");
+
 import { embedImage } from './metaimage.js';
 
 
@@ -30,7 +33,8 @@ const EncodingAndDownloadAudio = async (audio, audioBitRate, Track_Info) => {
     const audio_title = (`${Track_Info.audio_name || ""}${artist}${other_artist}`).replaceAll(/[’'`|?"||]/g, "").replaceAll(/[,:/]/g, "_");
 
     // Checking if the songit folder exist or not 
-    const dir = `C:\\Users\\User\\Downloads\\songit`;
+    const dir = `${config.Download_location}\\songit`;
+
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true })
     }
@@ -50,7 +54,7 @@ const EncodingAndDownloadAudio = async (audio, audioBitRate, Track_Info) => {
 
 
       // Path to directoy
-      const dirPath = path.join(os.tmpdir() + "\\songit\\images")
+      const dirPath = path.join(os.homedir(), ".config", "songit", "images")
       imagePath = `${dirPath}\\${audio_title}.jpg`;
 
 
