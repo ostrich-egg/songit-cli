@@ -3,6 +3,7 @@ import path from "path";
 import os from "os";
 import axios from "axios";
 import open from "open";
+import chalk from "chalk";
 
 let Configdir = path.join(os.homedir(), ".config", "songit")
 process.env["NODE_CONFIG_DIR"] = Configdir;
@@ -37,7 +38,7 @@ class Spotify {
         } catch (error) {
 
 
-            console.log("Please Check your spotify CLIENT_ID and CLIENT_SECRET")
+            console.log(chalk.bgRed.white("Please Check your spotify CLIENT_ID and CLIENT_SECRET"))
             await open(`${Configdir}\\default.json`, { wait: true });//open config file automatically
             return;
 

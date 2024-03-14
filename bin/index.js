@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 import { Scrapped } from "./lib&api/scrapper.js";
 import { videoChunks } from "./lib&api/ytdl.js";
 
@@ -9,6 +10,29 @@ import fs from "fs"
 import open from "open";
 
 import { Spotify } from "./lib&api/spotify.js";
+
+import chalk from "chalk"
+import gradient from "gradient-string";
+import figlet from "figlet";
+
+const sleep = (ms = 1100) => new Promise((resolve) => setTimeout(resolve, ms))
+
+async function Intro() {
+
+    figlet("SONG IT", (err, data) => {
+
+        if (err) {
+            return;
+        }
+        console.log(gradient('cyan', 'pink')(data));
+    })
+    await sleep();
+
+}
+await Intro();
+
+
+
 
 
 
@@ -72,20 +96,27 @@ const configuration = () => {
  */
 const User_argument = async () => {
 
-    const user_input = process.argv.slice(2)
+    const user_input = process.argv.slice(2);
 
+
+
+    if (!user_input[0]) {
+
+        console.log(chalk.bgWhite.cyan(`  soli 'never gonna give you up'  `));
+        return;
+    }
     //NOTE // CONFIGURATION
-    if (user_input[0].startsWith("-c")) {
+    if (user_input[0]?.startsWith("-c")) {
 
         const ConfigPath = configuration();
-        console.log(`Find the Path of Config:`, `${Configdir}\\default.json`);
+        console.log(chalk.bgWhite.cyan(`  Find the Path of Config:`, `${Configdir}\\default.json  `));
 
         await open(ConfigPath);//open config file automatically
         return;
     }
 
     //NOTE // Search for the song with name ///////// NO USE OF SPOTIFY /////////
-    if (user_input[0].startsWith("-raw")) {
+    else if (user_input[0]?.startsWith("-raw")) {
 
         let _input = user_input.slice(1);
         final_input = _input.join(" ");

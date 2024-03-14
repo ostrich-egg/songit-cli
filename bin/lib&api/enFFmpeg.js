@@ -12,6 +12,9 @@ import axios from "axios"
 import os from "os"
 import fs from "fs"
 import path from "path"
+import chalk from "chalk"
+
+
 
 
 const { default: config } = await import("config");
@@ -21,16 +24,25 @@ import { embedImage } from './metaimage.js';
 
 
 
+
+
+
+
+
 const EncodingAndDownloadAudio = async (audio, audioBitRate, Track_Info) => {
+
 
   try {
 
-    console.log("Track info", Track_Info);
+
+    // console.log("Track info", Track_Info);
 
     // For the audio title
     const artist = (Track_Info.album_artist) ? ` - ${Track_Info.album_artist}` : "";
     const other_artist = ((Track_Info.contributing_artist) !== artist.replace(" - ", "")) ? (`_${Track_Info.contributing_artist}`) : "";
     const audio_title = (`${Track_Info.audio_name || ""}${artist}${other_artist}`).replaceAll(/[’'`|?"||]/g, "").replaceAll(/[,:/]/g, "_");
+
+
 
     // Checking if the songit folder exist or not 
     const dir = `${config.Download_location}\\songit`;
@@ -51,6 +63,7 @@ const EncodingAndDownloadAudio = async (audio, audioBitRate, Track_Info) => {
         url: `${Track_Info.image.url}`,
         responseType: 'stream',
       })
+
 
 
       // Path to directoy
@@ -77,7 +90,8 @@ const EncodingAndDownloadAudio = async (audio, audioBitRate, Track_Info) => {
 
 
 
-
+    //Logging the name of the track
+    console.log(chalk.bgWhite.cyan(`Track = ${audio_title}, Album = ${Track_Info.album}(${Track_Info.year}) `))
     //////////////////////ffmpeg encoding
     const encoding = new ffmpeg(audio)
 
@@ -99,7 +113,9 @@ const EncodingAndDownloadAudio = async (audio, audioBitRate, Track_Info) => {
 
 
 
+
     encoding.on("progress", (progress) => {
+
 
       const duration = Track_Info.duration / 1000; //duration from ms to s
 
@@ -112,7 +128,9 @@ const EncodingAndDownloadAudio = async (audio, audioBitRate, Track_Info) => {
 
       let percent = Math.ceil((current_time / duration) * 100);
 
-      process.stdout.write(`Progressing ${percent}%\r`);
+      process.stdout.write(chalk.bgBlack.white(`Progressing ${percent}%\r`));
+
+
 
 
 
@@ -125,14 +143,16 @@ const EncodingAndDownloadAudio = async (audio, audioBitRate, Track_Info) => {
         embedImage(imagePath, outputPath);
         fs.unlinkSync(imagePath);  //It clear the image that was stored before from the PC after image is embedded
 
-        console.log("Music is ready to serve")
+        console.log(chalk.green("  Music is ready to serve  "))
 
 
       })
       .on("error", (error, stdout, stderr) => {
-        console.log("Cannot process audio", error.message)
+        console.log(chalk.red("Cannot process audio"), error.message)
       })
-      .save(outputPath);
+
+
+    encoding.save(outputPath);
 
 
   } catch (error) {
