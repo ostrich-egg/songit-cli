@@ -40,6 +40,11 @@ With spotify
 soli "Never gonna give you up"
 ```
 
+**Spotify's song url**
+```sh
+soli "https://open.spotify.com/track/4PTG3Z6ehGkBFwjybzWkR8?si=ecff2d7fb8c74936"
+```
+
 
 ## Notes
 
