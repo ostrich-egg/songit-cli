@@ -8,6 +8,7 @@ import path from "path";
 import os from "os"
 import fs from "fs"
 import open from "open";
+import axios from "axios";
 
 import { Spotify } from "./lib&api/spotify.js";
 
@@ -88,6 +89,13 @@ const configuration = () => {
 
 
 
+const urlExtractor = async (user_input) => {
+
+    const response = await axios.get(user_input)
+    return (response.data.split('title', 2)[1]).replaceAll(/[>\/"<\|]/g, "").split("Spotify")[0];
+
+}
+
 
 
 /**
@@ -98,6 +106,13 @@ const User_argument = async () => {
 
     const user_input = process.argv.slice(2);
 
+    let regix = `(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})`
+    if (user_input[0].match(regix)) {
+
+        final_input = await urlExtractor(user_input)
+        LibAndAPICalling();
+        return;
+    }
 
 
     if (!user_input[0]) {
