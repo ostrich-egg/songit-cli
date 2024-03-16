@@ -106,6 +106,13 @@ const User_argument = async () => {
 
     const user_input = process.argv.slice(2);
 
+    if (!user_input[0]) {
+
+        console.log(chalk.bgWhite.cyan(`  soli 'never gonna give you up'  `));
+        return;
+    }
+
+
     let regix = `(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})`
     if (user_input[0].match(regix)) {
 
@@ -115,11 +122,6 @@ const User_argument = async () => {
     }
 
 
-    if (!user_input[0]) {
-
-        console.log(chalk.bgWhite.cyan(`  soli 'never gonna give you up'  `));
-        return;
-    }
     //NOTE // CONFIGURATION
     if (user_input[0]?.startsWith("-c")) {
 
