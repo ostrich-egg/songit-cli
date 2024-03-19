@@ -36,14 +36,19 @@ soli -raw "Never gonna give you up"
 
 **With spotify**
 
-    *Songs name*
+    Songs name
 ```sh
 soli "Never gonna give you up"
 ```
 
-    *Track url(spotify)*
+    Track url(spotify)
 ```sh
 soli "https://open.spotify.com/track/4PTG3Z6ehGkBFwjybzWkR8?si=ecff2d7fb8c74936"
+```
+
+   Album url(spotify)
+```sh
+soli "https://open.spotify.com/album/3wITH77YIxYdtVv1W4W1SI?si=7RuOwNOUTaCAaFoZSjCg-Q"
 ```
 
 
