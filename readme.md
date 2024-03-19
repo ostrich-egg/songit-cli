@@ -41,12 +41,12 @@ soli -raw "Never gonna give you up"
 soli "Never gonna give you up"
 ```
 
-*Track url(spotify)*
+*Track url (spotify)*
 ```sh
 soli "https://open.spotify.com/track/4PTG3Z6ehGkBFwjybzWkR8?si=ecff2d7fb8c74936"
 ```
 
-*Album url(spotify)*
+*Album url (spotify)*
 ```sh
 soli "https://open.spotify.com/album/3wITH77YIxYdtVv1W4W1SI?si=7RuOwNOUTaCAaFoZSjCg-Q"
 ```
@@ -54,8 +54,8 @@ soli "https://open.spotify.com/album/3wITH77YIxYdtVv1W4W1SI?si=7RuOwNOUTaCAaFoZS
 
 ## Notes
 
-*> It is recommended to config spotify for better experience.*<br>
-*> Using link to download any song has higher accuracy*<br>
+*> It is recommended to configure spotify for better experience.*<br>
+*> Using link to download any song has higher accuracy (only applicable while using spotify: to use, just follow configure process)*<br>
 *> While downloading album, songs will be downloaded synchronously*<br>
 *> Make sure to keep updating, as new features will keep being added on*
 
