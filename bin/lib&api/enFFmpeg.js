@@ -14,6 +14,7 @@ import fs from "fs"
 import path from "path"
 import chalk from "chalk"
 
+import { Spotify } from './spotify.js';
 
 
 
@@ -29,13 +30,10 @@ import { embedImage } from './metaimage.js';
 
 
 
-const EncodingAndDownloadAudio = async (audio, audioBitRate, Track_Info) => {
+const EncodingAndDownloadAudio = async (audio, audioBitRate, Track_Info, passing_flag = "") => {
 
 
   try {
-
-
-    // console.log("Track info", Track_Info);
 
     // For the audio title
     const artist = (Track_Info.album_artist) ? ` - ${Track_Info.album_artist}` : "";
@@ -110,10 +108,6 @@ const EncodingAndDownloadAudio = async (audio, audioBitRate, Track_Info) => {
       )
 
 
-
-
-
-
     encoding.on("progress", (progress) => {
 
 
@@ -144,6 +138,14 @@ const EncodingAndDownloadAudio = async (audio, audioBitRate, Track_Info) => {
         fs.unlinkSync(imagePath);  //It clear the image that was stored before from the PC after image is embedded
 
         console.log(chalk.green("  Music is ready to serve  "))
+
+        if (passing_flag === "album") {
+
+          let iteration = Track_Info.iteration + 1;
+          const spotifyAPI = new Spotify();
+          spotifyAPI.getAlbum(Track_Info.album_link, iteration, "call", Track_Info.Tracklength)
+
+        }
 
 
       })

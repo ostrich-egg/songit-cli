@@ -16,6 +16,7 @@ import chalk from "chalk"
 import gradient from "gradient-string";
 import figlet from "figlet";
 
+
 const sleep = (ms = 1100) => new Promise((resolve) => setTimeout(resolve, ms))
 
 async function Intro() {
@@ -91,9 +92,19 @@ const configuration = () => {
 
 const urlExtractor = async (user_input) => {
 
-    const response = await axios.get(user_input)
-    return (response.data.split('title', 2)[1]).replaceAll(/[>\/"<\|]/g, "").split("Spotify")[0];
+    try {
+        const response = await axios.get(user_input)
 
+        if (!response) {
+            throw "Error"
+
+        }
+        return (response.data.split('title', 2)[1]).replaceAll(/[>\/"<\|]/g, "").split("Spotify")[0];
+    } catch (error) {
+
+        console.log("Invalid URL.");
+        return;
+    }
 }
 
 
@@ -112,13 +123,39 @@ const User_argument = async () => {
         return;
     }
 
-
     let regix = `(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})`
     if (user_input[0].match(regix)) {
+        try {
 
-        final_input = await urlExtractor(user_input)
-        LibAndAPICalling();
-        return;
+            let flag;
+            let user_input_type = user_input[0].split("/")[3];
+
+            if (user_input_type === "track") {
+
+                final_input = await urlExtractor(user_input)
+                flag = "track";
+
+            }
+
+            if (user_input_type === "album") {
+
+                final_input = user_input[0];
+                flag = "album"
+            }
+
+
+            if (!final_input) {
+                throw "Invalid"
+            }
+
+            LibAndAPICalling(flag);
+            return;
+
+        } catch (error) {
+
+            console.log("Invalid URL. Please check!")
+            return
+        }
     }
 
 
@@ -145,7 +182,7 @@ const User_argument = async () => {
     else {
 
         final_input = user_input.join(" ");
-        LibAndAPICalling();
+        LibAndAPICalling("track");
     }
 
 }
@@ -155,7 +192,7 @@ User_argument();
 
 ///////////////////////////////////////////////////////////////////////////////////
 
-function LibAndAPICalling(flag = "") {
+export function LibAndAPICalling(flag = "", iteration = 0) {
 
 
     // let Track_info;
@@ -163,8 +200,7 @@ function LibAndAPICalling(flag = "") {
         audio_name: final_input || "",
     };
 
-
-
+    let passing_flag = "";
     let chooseVideoLink;
 
     //Init  spotify and get the track info from there
@@ -173,10 +209,23 @@ function LibAndAPICalling(flag = "") {
             if (flag !== "noSpotify") {
 
                 const spotifyAPI = new Spotify();
-                Track_info = await spotifyAPI.getTrack(final_input);
+
+                //to get album
+                if (flag === "album") {
+
+                    passing_flag = "album";
+
+                    Track_info = await spotifyAPI.getAlbum(final_input, iteration);
+
+                }
+
+                //to get track
+                if (flag === "track") {
+
+                    Track_info = await spotifyAPI.getTrack(final_input);
+                }
 
                 if (!Track_info) {
-                    console.log("Didnot get track info");
                     return;
                 }
 
@@ -194,20 +243,35 @@ function LibAndAPICalling(flag = "") {
     //Init scrapper and get the link from there with the info from spotify
     const scraperCaller = async () => {
 
-        const YTscrapper = new Scrapped(Track_info);
-        const data = await YTscrapper.YTdata();
-        chooseVideoLink = data.videos[0].link;
 
-        //////////////If No Spotify is used//////////////////////
-        const res = data?.videos[0];
 
-        if (flag === "noSpotify") {
-            noSpotify(res);
+        try {
+
+            let YTscrapper;
+
+            YTscrapper = new Scrapped(Track_info);
+            const data = await YTscrapper.YTdata();
+            chooseVideoLink = data.videos[0].link;
+
+
+            //////////////If No Spotify is used//////////////////////
+            const res = data?.videos[0];
+            if (flag === "noSpotify") {
+                noSpotify(res);
+            }
+            /////////////////Calling ytdl to download/////////////
+            Track_info.duration = res.duration;
+            ytdlCaller();
+
+
+
+
+
+        } catch (error) {
+
+            console.log(error)
+
         }
-
-        /////////////////Calling ytdl to download/////////////
-        Track_info.duration = res.duration;
-        ytdlCaller();
 
     }
 
@@ -240,7 +304,7 @@ function LibAndAPICalling(flag = "") {
 
     //Send those data to the ytdl for downloading
     const ytdlCaller = () => {
-        videoChunks(chooseVideoLink, Track_info);
+        videoChunks(chooseVideoLink, Track_info, passing_flag);
     }
 
 
@@ -251,6 +315,8 @@ function LibAndAPICalling(flag = "") {
 
 
 }
+
+
 
 
 

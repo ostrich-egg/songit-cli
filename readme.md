@@ -28,20 +28,20 @@ soli -c
 
 ## Run/Usage
 
->**Without spotify**
+**Without spotify**
 
 ```sh
 soli -raw "Never gonna give you up"
 ```
 
->**With spotify**
+**With spotify**
 
-Songs name
+    *Songs name*
 ```sh
 soli "Never gonna give you up"
 ```
 
-Spotify url
+    *Track url(spotify)*
 ```sh
 soli "https://open.spotify.com/track/4PTG3Z6ehGkBFwjybzWkR8?si=ecff2d7fb8c74936"
 ```

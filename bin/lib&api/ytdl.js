@@ -2,7 +2,7 @@ process.env.YTDL_NO_UPDATE;
 import ytdl from "ytdl-core"
 import { EncodingAndDownloadAudio } from "./enFFmpeg.js";
 
-const videoChunks = async (video_url, Track_Info) => {
+const videoChunks = async (video_url, Track_Info, passing_flag = "") => {
 
     try {
 
@@ -13,9 +13,7 @@ const videoChunks = async (video_url, Track_Info) => {
         const audioBitRate = highestFormat.audioBitrate || 192;
 
         //NOTE FFmpeg library where encoding happens and download also
-        EncodingAndDownloadAudio(audio, audioBitRate, Track_Info);
-
-
+        EncodingAndDownloadAudio(audio, audioBitRate, Track_Info, passing_flag);
 
 
     } catch (error) {
