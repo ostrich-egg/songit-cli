@@ -54,7 +54,9 @@ soli "https://open.spotify.com/album/3wITH77YIxYdtVv1W4W1SI?si=7RuOwNOUTaCAaFoZS
 
 ## Notes
 
-*> It is recommended to use spotify for accuracy and better quality.*<br>
+*> It is recommended to config spotify for better experience.*<br>
+*> Using link to download any song has higher accuracy*<br>
+*> While downloading album, songs will be downloaded synchronously*<br>
 *> Make sure to keep updating, as new features will keep being added on*
 
 
