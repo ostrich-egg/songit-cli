@@ -89,7 +89,7 @@ const EncodingAndDownloadAudio = async (audio, audioBitRate, Track_Info, passing
 
 
     //Logging the name of the track
-    console.log(chalk.bgWhite.cyan(`Track = ${audio_title}, Album = ${Track_Info.album}(${Track_Info.year}) `))
+    console.log(chalk.bgWhite.blue(`Track = ${audio_title}, Album = ${Track_Info.album}(${Track_Info.year}) `))
     //////////////////////ffmpeg encoding
     const encoding = new ffmpeg(audio)
 

@@ -119,7 +119,7 @@ const User_argument = async () => {
 
     if (!user_input[0]) {
 
-        console.log(chalk.bgWhite.cyan(`  soli 'never gonna give you up'  `));
+        console.log(chalk.bgWhite.blue(`  soli 'never gonna give you up'  `));
         return;
     }
 
@@ -163,7 +163,7 @@ const User_argument = async () => {
     if (user_input[0]?.startsWith("-c")) {
 
         const ConfigPath = configuration();
-        console.log(chalk.bgWhite.cyan(`  Find the Path of Config:`, `${Configdir}\\default.json  `));
+        console.log(chalk.bgWhite.blue(`  Find the Path of Config:`, `${Configdir}\\default.json  `));
 
         await open(ConfigPath);//open config file automatically
         return;
