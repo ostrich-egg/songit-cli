@@ -189,7 +189,7 @@ class Spotify {
                     return this.fn_Track_Info(list[iteration], extra_info);
                 }
                 else {
-                    console.log(chalk.bgYellow(" Album download Completed "));
+                    console.log(chalk.bgYellow.black(" Album download Completed "));
                     return;
                 }
             }

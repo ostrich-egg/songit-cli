@@ -43,7 +43,7 @@ const EncodingAndDownloadAudio = async (audio, audioBitRate, Track_Info, passing
 
 
     // Checking if the songit folder exist or not 
-    const dir = `${config.Download_location}\\songit`;
+    const dir = `${config.Download_location}\\songit${passing_flag === "album" ? `\\${Track_Info?.album} by ${Track_Info?.album_artist}` : ""}`;
 
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true })
