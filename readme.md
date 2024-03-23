@@ -1,6 +1,8 @@
 # Songit <br>
 *songit more like sangeet(music) is a CLI application to download any music you want*<br>
 
+![Images](readme.png)<br>
+
 ## Get Started/Installation
 
 **Download**
