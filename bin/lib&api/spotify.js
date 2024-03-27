@@ -165,13 +165,11 @@ class Spotify {
             let Tracklength = response.data.total_tracks;
 
 
-            let random = Math.floor(Math.random() * (response.data.images.length)
-            );
 
             let extra_info = {
                 flag: "album",
                 album: response.data.name,
-                images: response.data.images[random],
+                images: response.data.images[0],
                 date: response.data.release_date,
                 album_link: user_input,
                 iteration: "",

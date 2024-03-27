@@ -23,27 +23,23 @@ const { default: config } = await import("config");
 import { embedImage } from './metaimage.js';
 
 
-
-
-
-
-
-
-
 const EncodingAndDownloadAudio = async (audio, audioBitRate, Track_Info, passing_flag = "") => {
 
 
   try {
 
     // For the audio title
+    const filter = (name) => {
+
+      return name.replaceAll(/[’'`|?"|'|]/g, "").replaceAll(/[,:/]/g, "_");
+    }
+
     const artist = (Track_Info.album_artist) ? ` - ${Track_Info.album_artist}` : "";
     const other_artist = ((Track_Info.contributing_artist) !== artist.replace(" - ", "")) ? (`_${Track_Info.contributing_artist}`) : "";
-    const audio_title = (`${Track_Info.audio_name || ""}${artist}${other_artist}`).replaceAll(/[’'`|?"||]/g, "").replaceAll(/[,:/]/g, "_");
-
-
+    const audio_title = filter(`${Track_Info.audio_name || ""}${artist}${other_artist}`);
 
     // Checking if the songit folder exist or not 
-    const dir = `${config.Download_location}\\songit${passing_flag === "album" ? `\\${Track_Info?.album} by ${Track_Info?.album_artist}` : ""}`;
+    const dir = `${config.Download_location}\\songit${passing_flag === "album" ? `\\${filter(Track_Info?.album)}` : ''}`;
 
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true })
