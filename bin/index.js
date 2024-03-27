@@ -15,6 +15,7 @@ import { Spotify } from "./lib&api/spotify.js";
 import chalk from "chalk"
 import gradient from "gradient-string";
 import figlet from "figlet";
+import { url } from "inspector";
 
 
 const sleep = (ms = 1100) => new Promise((resolve) => setTimeout(resolve, ms))
@@ -90,20 +91,27 @@ const configuration = () => {
 
 
 
-const urlExtractor = async (user_input) => {
+const urlExtractor = async (user_input, flag = "") => {
 
     try {
         const response = await axios.get(user_input)
 
         if (!response) {
-            throw "Error"
-
+            throw error
         }
+
+        // It check the youtube url
+        if (flag === "raw") {
+            return (response.data).split('<meta name=')[1].split("<title>")[1].split(" - YouTube")[0]
+        }
+        // else this will return the title from spotify url
         return (response.data.split('title', 2)[1]).replaceAll(/[>\/"<\|]/g, "").split("Spotify")[0];
+
     } catch (error) {
 
-        console.log("Invalid URL.");
-        return;
+        console.log(chalk.bgRed.white(` ${error.code}, Invalid, Please check again `));
+        process.exit();
+
     }
 }
 
@@ -133,6 +141,7 @@ const User_argument = async () => {
             if (user_input_type === "track") {
 
                 final_input = await urlExtractor(user_input)
+
                 flag = "track";
 
             }
@@ -145,7 +154,7 @@ const User_argument = async () => {
 
 
             if (!final_input) {
-                throw "Invalid"
+                throw error
             }
 
             LibAndAPICalling(flag);
@@ -153,8 +162,8 @@ const User_argument = async () => {
 
         } catch (error) {
 
-            console.log("Invalid URL. Please check!")
-            return
+            console.log(chalk.bgRed.white(` ${error.code} Something went wrong with URL/ Your input, Try again `))
+            return;
         }
     }
 
@@ -172,10 +181,17 @@ const User_argument = async () => {
     //NOTE // Search for the song with name ///////// NO USE OF SPOTIFY /////////
     else if (user_input[0]?.startsWith("-raw")) {
 
-        let _input = user_input.slice(1);
-        final_input = _input.join(" ");
-        LibAndAPICalling("noSpotify");
+        let _input = user_input.slice(1).join(" ");
 
+        if (_input.match(regix)) {
+            final_input = await urlExtractor(_input, "raw")
+
+        } else {
+
+            final_input = _input;
+        }
+
+        LibAndAPICalling("noSpotify");
 
     }
     /////////USE OF SPOTIFY////////////

@@ -32,8 +32,14 @@ soli -c
 
 **Without spotify**
 
+*Songs name*
 ```sh
 soli -raw "Never gonna give you up"
+```
+
+*Video url (youtube)*
+```sh
+ soli -raw "https://youtu.be/S-Kf6CnJC2w?si=ot3YAdgkWmmcZJUW"
 ```
 
 **With spotify**
@@ -57,7 +63,7 @@ soli "https://open.spotify.com/album/3wITH77YIxYdtVv1W4W1SI?si=7RuOwNOUTaCAaFoZS
 ## Notes
 
 *> It is recommended to configure spotify for better experience.*<br>
-*> Using link to download any song has higher accuracy (only applicable while using spotify: to use, just follow configure process)*<br>
+*> Using link to download any song has higher accuracy*<br>
 *> While downloading album, songs will be downloaded synchronously*<br>
 *> Make sure to keep updating, as new features will keep being added on*
 
