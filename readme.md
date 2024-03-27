@@ -30,7 +30,7 @@ soli -c
 
 ## Run/Usage
 
-**Without spotify**
+**Without spotify** *-raw*
 
 *Songs name*
 ```sh
